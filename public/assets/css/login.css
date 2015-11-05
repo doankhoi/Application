@@ -1,0 +1,78 @@
+body{
+	background-image: url(../img/bg_login.jpg);
+	width: 100%;
+	height: 100%;
+}
+
+.title-login img{
+	width: 100px;
+	height: 100px;
+	margin: auto;
+	margin-top: 30px;
+}
+
+.title-login p{
+	color: white;
+	font-weight: bold;
+	font-size: 3em;
+	text-align: center;
+}
+
+.main-login{
+	width: 40%;
+}
+
+
+/*.bt-login{
+	display: block;
+	margin: auto;
+	color: black;
+	background-color: #FFFF66;
+
+}
+
+.bt-login:hover{
+	background-color: #00FF33;
+}*/
+
+.bt-login {
+	margin: auto;
+	-moz-box-shadow:inset 0px 1px 0px 0px #fff6af;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fff6af;
+	box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background-color:#ffec64;
+	-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #ffaa22;
+	display:block;
+	color:#333333;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+}
+
+.bt-login:hover {
+	background-color:#ffab23;
+}
+
+.bt-login:active {
+	position:relative;
+	top:1px;
+}

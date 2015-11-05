@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/aplication":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/aplication","hostpath":"D:/WebWorkstation/Learning/Aplication","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/WebWorkstation/Learning/Aplication","disabled":false}}}
