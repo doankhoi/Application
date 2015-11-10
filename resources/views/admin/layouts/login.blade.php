@@ -24,7 +24,7 @@
         <p>Chicken Electric</p>
     </div>
     @include('admin.elements.flash_notification')
-
+    
     {!! Form::open(['route' => 'admin.login', 'role' => 'form']) !!}
        <div class="form-group">
             {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'Enter email']) !!}

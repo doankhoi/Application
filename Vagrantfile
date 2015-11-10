@@ -25,4 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     if File.exists? afterScriptPath then
         config.vm.provision "shell", path: afterScriptPath
     end
+
+    config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
 end

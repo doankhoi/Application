@@ -24,6 +24,6 @@ class AuthController extends Controller
     }
 
     public function postLogin(LoginRequest $request) {
-
+        
     }
 }
