@@ -11,11 +11,37 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
         'email' => $faker->email,
         'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'photo' => str_random(10)."jpg",
+        'number_login' => 2,
+        'fails_login' => 1,
+        'seen' => false,
+        'last_login' => date('Y-m-d'),
+        'register_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Models\UserInfo::class, function (Faker\Generator $faker) {
+	return [
+		'username' => $faker->name(),
+		'firstname' => $faker->firstName(),
+		'lastname' => $faker->lastName(),
+		'gender' => $faker->boolean(),
+		'tel' => $faker->phoneNumber(),
+		'city' => $faker->city(),
+		'address' => $faker->address(),
+		'online_status' => $faker->boolean(),
+		'chat_status' => $faker->boolean()
+	];
+});
+
+$factory->define(App\Models\Role::class, function (Faker\Generator $faker) {
+	return [
+		'title' => str_random(20),
+		'slug' => $faker->slug()
+	];
+});
+

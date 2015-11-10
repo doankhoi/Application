@@ -146,6 +146,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\AdminAuthServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Bestmomo\Filemanager\FilemanagerServiceProvider::class,
     ],
 
     /*
