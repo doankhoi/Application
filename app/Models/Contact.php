@@ -11,5 +11,4 @@ class Contact extends Model
 
     use DatePresenter; 
 
-    
 }

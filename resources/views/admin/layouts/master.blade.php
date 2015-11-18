@@ -22,7 +22,6 @@
     <!--Insert navabar-->
     @yield('navabar')
     <!--End Insert navabar-->
-
     <div class="container-fluid">
       <div class="row">
 

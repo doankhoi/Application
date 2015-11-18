@@ -1,22 +1,39 @@
 
 <?php
 
-//Admin guest
-Route::group(['middleware' => 'admin.guest'], function () {
+//Admin auth
+Route::group(['middleware' => 'admin'], function () {
 
-	Route::get('/', ['as' => 'admin.users.index', 'uses' => 'UserController@index']);
+    Route::group(['prefix' => 'users'], function() {
 
-	Route::group(['prefix' => 'create', 'as' => 'admin.users.create'], function () {
-		Route::get('/', 'UserController@create');
-		Route::post('/', 'UserController@store');
-	});
+        Route::get('/', ['as' => 'users.index', 'uses' => 'UserController@index']);
 
-	
-	/** 
-	* Page login
-	*/
-	Route::group(['prefix' => 'login', 'as' => 'login'], function () {
-		Route::get('/', ['uses' => 'AuthController@getLogin']);
-		Route::post('/', ['uses' => 'AuthController@postLogin']);
-	});
+        Route::group(['prefix' => 'create', 'as' => 'users.create'], function () {
+            Route::get('/', 'UserController@create');
+            Route::post('/', 'UserController@store');
+        });
+
+        Route::group(['prefix' => 'edit/{id}', 'where' => ['id' => '[0-9]+'], 'as' => 'users.edit'], function() {
+            Route::get('/', 'UserController@edit');
+            Route::match(['put', 'path'], '/', ['uses' => 'UserController@update', 'as' => 'users.update']);
+        });
+
+        Route::delete('/{id}', ['uses' => 'UserController@destroy']);
+    });
+    
+    Route::group(['prefix' => 'posts'], function() {
+        Route::get('/', ['uses' => 'PostController@index', 'as' => 'posts.index']);
+
+        Route::group(['prefix' => 'create', 'as' => 'posts.create'], function() {
+            Route::get('/', 'PostController@create');
+            Route::post('/', 'PostController@store');
+        });
+
+        Route::group(['prefix' => 'edit/{id}', 'where' => ['id' => '[0-9]+'], 'as' => 'posts.edit'], function() {
+            Route::get('/', 'PostController@edit');
+            Route::post('/', 'PostController@update');
+        });
+    });
+
+    
 });

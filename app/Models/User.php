@@ -51,4 +51,19 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function role()
+    {
+        return $this->hasOne('App\Models\Role', 'role_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role->slug == "admin";
+    }
+
+    public function isNotUser()
+    {
+        return $this->role->slug != "user";
+    }
 }

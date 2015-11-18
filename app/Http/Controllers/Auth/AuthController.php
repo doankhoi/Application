@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Illuminate\Contracts\Auth\Guard;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Repositories\UserRepository;
 
 class AuthController extends Controller
 {
@@ -33,33 +37,58 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function postLogin(LoginRequest $request, Guard $auth)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        $logValue = $request->input('log');
+        $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $throttles = in_array(ThrottlesLogins::class, class_uses_recursive(get_class($this)));
+
+        if($throttles && $this->hasTooManyLoginAttempts($request))
+        {
+            return redirect('/auth/login')->with('error', trans('front/login.maxattempt'))->withInput($request->only('log'));
+        }
+
+        $credentials = [
+            $logAccess => $logValue,
+            'password' => $request->input('password')
+        ];
+
+        if (!$auth->validate($credentials))
+        {
+            if ($throttles) 
+            {
+                $this->incrementLoginAttempts($request);
+            }
+
+            return redirect('auth/login')->with('error', trans('front/login.maxattempt'))->withInput($request->only('log'));
+        }
+
+        $user = $auth->getLastAttempted();
+
+        if ($user->confirmed)
+        {
+            if ($throttles) 
+            {
+                $this->clearLoginAttempts($request);
+            }
+
+            $auth->login($user, $request->has('memory'));
+
+            if ($request->session()->has('user_id'))
+            {
+                $request->session()->forget('user_id');
+            }
+
+            return redirect('/');
+        }
+
+        $request->session()->put('user_id', $user->id);
+
+        return redirect('/auth/login')->with('error', trans('front/verify.again'))->withInput($request->only('log'));
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function postRegister(RegisterRequest $request, UserRepository $user_gestion)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        
     }
 }

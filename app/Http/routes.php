@@ -12,34 +12,43 @@
 */
 
 /**
-*	Define group for admin control
+*   Define group for admin control
 */
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function() {
-	require app_path('Http/Routes/admin.php');
+    require app_path('Http/Routes/admin.php');
 });
 
 /**
 * Define group for member
 */
 Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as'=> 'member.'], function() {
-	require app_path('Http/Routes/member.php');
+    require app_path('Http/Routes/member.php');
 });
 
 /**
 * Define group for website
 */
 Route::group(['prefix' => 'website', 'namespace' => 'Website', 'as' => 'website.'], function() {
-	require app_path('Http/Routes/website.php');
+    require app_path('Http/Routes/website.php');
 });
 
 /**
 * Define group for API
 */
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
-	require app_path('Http/Routes/api.php');
+    require app_path('Http/Routes/api.php');
 });
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/**
+* Auth
+*/
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
