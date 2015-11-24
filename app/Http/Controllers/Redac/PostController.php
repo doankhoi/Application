@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Redac;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request as BaseRequest;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -10,6 +10,8 @@ use App\Http\Requests\Back\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use DB;
+use Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostController extends Controller
 {
@@ -111,4 +113,55 @@ class PostController extends Controller
     {
         //
     }
+
+    /**
+    * Switch status published post of post
+    * @param $idPost integer
+    * @return void
+    */
+    public function publishedPost($idPost)
+    {
+        if(Request::ajax())
+        {
+            DB::beginTransaction();
+
+            try{
+                $post = Post::findOrFail($idPost);
+                $post->is_active = ($post->is_active) ? 0 : 1;
+                $post->save();
+            } 
+            catch(ModelNotFoundException $e)
+            {
+                DB::rollback();
+                return response()->json(['error' => true]);
+            }
+
+            DB::commit();
+        }
+    }
+
+    /**
+    * Switch status seen of a post
+    */
+    public function seenPost($idPost)
+    {
+        if(Request::ajax())
+        {
+            DB::beginTransaction();
+
+            try{
+                $post = Post::findOrFail($idPost);
+                $post->seen = ($post->seen) ? 0 : 1;
+                $post->save();
+            } 
+            catch(ModelNotFoundException $e)
+            {
+                DB::rollback();
+                return response()->json(['error' => true]);
+            }
+
+            DB::commit();
+        }
+    }
+
 }

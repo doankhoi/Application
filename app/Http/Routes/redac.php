@@ -1,7 +1,7 @@
 <?php
 Route::group(['middleware' => 'redac'], function() {
 
-    Route::get('/', function() {
+    Route::get('/', ['as' => 'index'], function() {
         return redirect(route('redac.posts.index'));
     });
 
@@ -11,6 +11,8 @@ Route::group(['middleware' => 'redac'], function() {
 	Route::group(['prefix' => 'posts'], function() {
         
         Route::get('/', ['uses' => 'PostController@index', 'as' => 'posts.index']);
+        Route::get('/publishedPost/{idPost}', ['uses' => 'PostController@publishedPost', 'as' => 'posts.published']);
+        Route::get('/seenPost/{idPost}', ['uses' => 'PostController@seenPost', 'as' => 'posts.seen']);
 
         Route::group(['prefix' => 'create', 'as' => 'posts.create'], function() {
             Route::get('/', 'PostController@create');

@@ -22,6 +22,8 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect('auth/login');
+        $message = "Tài khoản của bạn không có quyền truy cập. Hãy đăng nhập với tài khoản khác.";
+        $alertClass = "alert-danger";
+        return redirect('auth/login')->with(compact('message', 'alertClass'));
     }
 }

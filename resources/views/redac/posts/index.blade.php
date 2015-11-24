@@ -20,19 +20,25 @@
                     <td>{!! $stt !!}</td>
                     <td>{!! $post->title !!}</td>
                     @if($post->is_active)
-                        <td><input type="checkbox" checked="checked"> published</td>
+                        <td>
+                            <input type="checkbox" checked="checked" id="cb-published" data-url="{!! route('redac.posts.published', ['idPost' => $post->id]) !!}"> 
+                            published
+                        </td>
                     @else
-                        <td><input type="checkbox"> published</td>
+                        <td>
+                            <input type="checkbox" id="cb-published" data-url="{!! route('redac.posts.published', ['idPost' => $post->id]) !!}"> 
+                            published
+                        </td>
                     @endif
 
                     @if($post->seen)
-                        <td><input type="checkbox" checked="checked">đã xem</td>
+                        <td><input type="checkbox" checked="checked" id="cb-seen" data-url="{!! route('redac.posts.seen', ['idPost' => $post->id]) !!}">đã xem</td>
                     @else
-                        <td><input type="checkbox">đã xem</td>
+                        <td><input type="checkbox" id="cb-seen" data-url="{!! route('redac.posts.seen', ['idPost' => $post->id]) !!}">đã xem</td>
                     @endif
 
                     <td>
-                        <a href="#" class="btn btn-warning btn-action">View</a>
+                        <a href="{!! route('website.posts.show') !!}" class="btn btn-warning btn-action">View</a>
                         <a href="#" class="btn btn-success btn-action">Edit</a>
                         <a href="javascript:void(0)" class="btn btn-danger btn-action">Delete</a>
                     </td>

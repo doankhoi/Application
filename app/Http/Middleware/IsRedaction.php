@@ -21,6 +21,8 @@ class IsRedaction
             return $next($request);
         }
 
+        $message = "Tài khoản bạn đang dùng không có quyền truy câp. Hãy đăng nhập với tài khoản khác.";
+        $alertClass = "alert-danger";
         return redirect('auth/login');
     }
 }

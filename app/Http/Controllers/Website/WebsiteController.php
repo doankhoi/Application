@@ -23,6 +23,11 @@ class WebsiteController extends Controller
         return view('website.index', compact('posts'));
     }
 
+    public function show($id)
+    {
+
+    }
+    
     public function confirmUser($register_token)
     {
         $user = User::where('register_token', $register_token)->first();
