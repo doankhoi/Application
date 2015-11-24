@@ -32,6 +32,10 @@ Route::group(['prefix' => 'website', 'namespace' => 'Website', 'as' => 'website.
     require app_path('Http/Routes/website.php');
 });
 
+Route::group(['prefix' => 'redac', 'namespace' => 'Redac', 'as' => 'redac.'], function() {
+    require app_path('Http/Routes/redac.php');
+});
+
 /**
 * Define group for API
 */
@@ -41,13 +45,32 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function() {
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('website.index'));
 });
 
 
 /**
 * Auth
 */
+
+//Login
+Route::get('/auth/login', function() {
+	return view('auth.login');
+});
+
+//Forget password
+Route::get('/password/email', function() {
+	return view('auth/password');
+});
+
+//Forget password
+Route::get('/auth/register', function() {
+	return view('auth/register');
+});
+
+//Confirm user
+Route::get('/auth/confirm/{register_token}', 'Website\WebsiteController@confirmUser');
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',

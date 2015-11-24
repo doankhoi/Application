@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Redac;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Back\PostRequest;
+use App\Models\Category;
+use App\Models\Post;
+use DB;
 
 class PostController extends Controller
 {
+    protected $itemPerPage = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +22,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        
+        $posts = Post::orderBy('seen', 'asc')->orderBy('created_at', 'desc')->paginate($this->itemPerPage);
+        return view('redac.posts.index', compact('posts'));
     }
 
     /**
@@ -26,7 +33,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $url = config('media.url');
+        $categories = ['' => 'Chọn một nhóm'] + Category::where('is_active', 1)->lists('name', 'id')->toArray();
+        return view('redac.posts.create', compact('url', 'categories'));
     }
 
     /**
@@ -35,9 +44,27 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try
+        {
+            $inputs = $request->all();
+            $inputs['user_id'] = auth()->user()->id;
+            Post::create($inputs);
+            $message = "Tạo bài viết thành công";
+            $alertClass = "alert-success";
+        } 
+        catch(Exception $e)
+        {
+            $message = "Tạo bài viết lỗi";
+            $alertClass = "alert-danger";
+            DB::rollback();
+            return redirect(route('redac.posts.create'))->with(compact('message', 'alertClass'))->withInput();
+        }
+        DB::commit();
+
+        return redirect(route('redac.posts.index'))->with(compact('message', 'alertClass'))->withInput();
     }
 
     /**

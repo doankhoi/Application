@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use Validator;
 use Illuminate\Contracts\Auth\Guard;
 use App\Http\Controllers\Controller;
@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Repositories\UserRepository;
+use App\Jobs\SendMail;
 
 class AuthController extends Controller
 {
@@ -45,7 +46,9 @@ class AuthController extends Controller
 
         if($throttles && $this->hasTooManyLoginAttempts($request))
         {
-            return redirect('/auth/login')->with('error', trans('front/login.maxattempt'))->withInput($request->only('log'));
+            $message = "Đăng nhập vượt quá số lần quy định.";
+            $alertClass = "alert-danger";
+            return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
         }
 
         $credentials = [
@@ -60,7 +63,9 @@ class AuthController extends Controller
                 $this->incrementLoginAttempts($request);
             }
 
-            return redirect('auth/login')->with('error', trans('front/login.maxattempt'))->withInput($request->only('log'));
+            $message = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
+            $alertClass = "alert-danger";
+            return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
         }
 
         $user = $auth->getLastAttempted();
@@ -78,17 +83,21 @@ class AuthController extends Controller
             {
                 $request->session()->forget('user_id');
             }
-
-            return redirect('/');
+            return redirect(route('website.index'));
         }
 
         $request->session()->put('user_id', $user->id);
-
-        return redirect('/auth/login')->with('error', trans('front/verify.again'))->withInput($request->only('log'));
+        $message = "Tên đăng nhập hoặc mật khẩu không hợp lệ.";
+        $alertClass = "alert-danger";
+        return redirect()->back()->with(compact('message', 'alertClass'))->withInput();
     }
 
     public function postRegister(RegisterRequest $request, UserRepository $user_gestion)
     {
-        
+        $user = $user_gestion->storeUserRegister($request);
+        $this->dispatch(new SendMail($user));
+        $alertClass = "alert-success";
+        $message = "ChickenElectric thông báo.Bạn đã đăng ký thành công tài khoản. Để hoàn tất bạn hãy truy cập email để kích hoạt tài khoản.";
+        return redirect(route('website.index'))->with(compact('message', 'alertClass'));
     }
 }

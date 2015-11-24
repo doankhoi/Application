@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
+            $table->string('username', 40);
             $table->string('password', 60);
             $table->string('photo', 100);
             $table->bigInteger('number_login')->default(0);
@@ -25,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active')->default(0);
             $table->string('register_token', 100);
             $table->timestamps();
-            $table->index(['email', 'password']);
+            $table->index(['email', 'password', 'username']);
         });
     }
 

@@ -28,4 +28,16 @@ class LoginRequest extends Request
             'password' => 'required'
         ];
     }
+
+    /**
+     * Messages for validate
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'log.required' => 'Tên đăng nhập không được rỗng.',
+            'password.required' => 'Mật khẩu không được rỗng.'
+        ];
+    }
 }

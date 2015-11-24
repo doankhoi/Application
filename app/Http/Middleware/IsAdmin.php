@@ -22,6 +22,6 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect()->route('admin.login');
+        return redirect('auth/login');
     }
 }

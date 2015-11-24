@@ -9,17 +9,17 @@ class UserInfo extends Model
     protected $table = "user_infos";
 
     protected $fillable = [
-        'username',
+        'user_id',
         'firstname',
         'lastname',
         'city',
         'address',
-        'photo',
         'gender',
         'tel',
         'online_status',
         'chat_status',
-        'facebook_token'
+        'facebook_token',
+        'gmail_token'
     ];
 
     public function user()

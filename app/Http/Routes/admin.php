@@ -4,6 +4,8 @@
 //Admin auth
 Route::group(['middleware' => 'admin'], function () {
 
+    Route::get('/', ['as' => 'index', 'uses' => 'AdminController@index']);
+
     Route::group(['prefix' => 'users'], function() {
 
         Route::get('/', ['as' => 'users.index', 'uses' => 'UserController@index']);
@@ -20,20 +22,5 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::delete('/{id}', ['uses' => 'UserController@destroy']);
     });
-    
-    Route::group(['prefix' => 'posts'], function() {
-        Route::get('/', ['uses' => 'PostController@index', 'as' => 'posts.index']);
 
-        Route::group(['prefix' => 'create', 'as' => 'posts.create'], function() {
-            Route::get('/', 'PostController@create');
-            Route::post('/', 'PostController@store');
-        });
-
-        Route::group(['prefix' => 'edit/{id}', 'where' => ['id' => '[0-9]+'], 'as' => 'posts.edit'], function() {
-            Route::get('/', 'PostController@edit');
-            Route::post('/', 'PostController@update');
-        });
-    });
-
-    
 });

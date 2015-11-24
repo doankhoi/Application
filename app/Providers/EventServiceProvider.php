@@ -13,9 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
-        ],
+        'auth.login' => ['App\Services\Status@setLoginStatus'],
+        'auth.logout' => ['App\Services\Status@setVisitorStatus'],
+        'user.access' => ['App\Services\Status@setStatus']
     ];
 
     /**
@@ -27,7 +27,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot(DispatcherContract $events)
     {
         parent::boot($events);
-
-        //
     }
 }

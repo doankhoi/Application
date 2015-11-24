@@ -13,6 +13,6 @@ class Tag extends Model
 
     public function posts()
     {
-    	return $this->hasMany('App\Models\Posts');
+    	return $this->belongsToMany('App\Models\Posts');
     }
 }

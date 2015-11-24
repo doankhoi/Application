@@ -15,7 +15,6 @@ class CreateUserInfoTable extends Migration
         Schema::create('user_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('username', 40);
             $table->string('firstname', 20);
             $table->string('lastname', 20);
             $table->integer('gender')->nullable();
@@ -27,7 +26,7 @@ class CreateUserInfoTable extends Migration
             $table->string('facebook_token')->nullable();
             $table->string('gmail_token')->nullable();
             $table->timestamps();
-            $table->index(['username', 'firstname', 'lastname']);
+            $table->index(['firstname', 'lastname']);
         });
     }
 

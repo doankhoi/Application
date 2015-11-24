@@ -1,0 +1,7 @@
+<div class="widget-facebook  push-down-30">
+    <h6>Facebook</h6>
+    <div id="likebox-wrapper">
+        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fproteusthemes&amp;width&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=false&amp;appId=685180284845706">
+        </iframe>
+    </div>
+</div>

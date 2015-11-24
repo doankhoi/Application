@@ -1,0 +1,14 @@
+#photo-user {
+    height: 90px;
+    width: 90px;
+}
+
+.info-user
+{
+	padding: 10px;
+}
+
+#icon-user {
+	width: 40px;
+	height: 40px;
+}

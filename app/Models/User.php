@@ -28,7 +28,20 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['email', 'password'];
+    protected $fillable = [
+        'email',
+        'password',
+        'username',
+        'photo',
+        'number_login',
+        'fails_login',
+        'role_id',
+        'seen',
+        'is_active',
+        'last_login',
+        'register_token',
+        'confirmed'
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -54,7 +67,7 @@ class User extends Model implements AuthenticatableContract,
 
     public function role()
     {
-        return $this->hasOne('App\Models\Role', 'role_id');
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function isAdmin()

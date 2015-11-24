@@ -109,7 +109,7 @@ return [
     */
 
     'providers' => [
-
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -147,6 +147,7 @@ return [
         App\Providers\AdminAuthServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
+        App\Providers\ValidateServiceProvider::class,
     ],
 
     /*
@@ -161,7 +162,7 @@ return [
     */
 
     'aliases' => [
-
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
