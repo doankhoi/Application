@@ -31,7 +31,6 @@
             {!! Form::submit('Duyệt toàn bộ', ['class' => 'btn btn-primary', 'id' => 'check-all-user']) !!}
         {!! Form::close() !!}
     </div>
-
     <table class="table">
         <thead>
             <th>Tên</th>

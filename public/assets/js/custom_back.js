@@ -61,6 +61,7 @@ $(function() {
     //all check message
     $("#all-check-message").click(function() {
         var ok = confirm("Bạn muốn duyệt toàn bộ tin nhắn ?");
+
         if(ok)
         {
             var url = $(this).data('url');
