@@ -25,4 +25,5 @@ $(function() {
             alert('Browser not support!');
         }
     });
+
 });

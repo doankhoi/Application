@@ -40,7 +40,8 @@ class User extends Model implements AuthenticatableContract,
         'is_active',
         'last_login',
         'register_token',
-        'confirmed'
+        'confirmed',
+        'description'
     ];
 
     /**
@@ -78,5 +79,25 @@ class User extends Model implements AuthenticatableContract,
     public function isNotUser()
     {
         return $this->role->slug != "user";
+    }
+
+    /**
+     * Check media all access
+     *
+     * @return bool
+     */
+    public function accessMediasAll()
+    {
+        return $this->isAdmin();
+    }
+
+    /**
+     * Check media access one folder
+     *
+     * @return bool
+     */
+    public function accessMediasFolder()
+    {
+        return $this->isNotUser();
     }
 }

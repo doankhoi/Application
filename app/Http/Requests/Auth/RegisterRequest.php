@@ -27,13 +27,14 @@ class RegisterRequest extends Request
             'photo' => 'image|max:500',
             'email' => 'required|email|unique:users,email',
             'username' => 'required|unique:users,username|min:3',
-            'password' => 'required|min:8',
+            'password' => 'required|min:8|confirmed',
             'firstname' => 'required|max:20',
             'lastname' => 'required|max:20',
             'gender' => 'required|in:1,2,3',
-            'tel' => 'regex:/[0-9]+/',
+            'tel' => 'regex:/^\d{9,11}$/',
             'city' => 'max:30',
-            'address' => 'max:60'
+            'address' => 'max:60',
+            'description' => 'required|max:255'
         ];
     }
 
@@ -50,6 +51,7 @@ class RegisterRequest extends Request
             'username.min' => 'Tên đăng nhập tối thiểu 3 ký tự.',
             'password.required' => 'Trường password rỗng.',
             'password.min' => 'Password phải tối thiểu 8 kí tự.',
+            'password.confirmed' => 'Mật khẩu nhật không trùng khớp.',
             'firstname.required' => 'Trường họ rỗng.',
             'firstname.max' => 'Trường họ vượt quá 20 ký tự.',
             'lastname.required' => 'Trường tên rỗng',
@@ -58,7 +60,9 @@ class RegisterRequest extends Request
             'gender.in' => 'Giá trị giới tính không hợp lệ.',
             'tel.regex' => 'Trường số điện thoại không đúng định dạng.',
             'city.max' => 'Trường thành phố vượt quá 30 ký tự.',
-            'address.max' => 'Trường địa chỉ vượt quá 60 ký tự.'
+            'address.max' => 'Trường địa chỉ vượt quá 60 ký tự.',
+            'description.required' => 'Trường miêu tả ngắn gọn rỗng.',
+            'description.max' => 'Trường miêu tả ngắn gọn vượt quá 255 kí tự.'
         ];
     }
 }

@@ -1,18 +1,14 @@
 <div class="widget-recent-comments  push-down-30">
     <h6>Recent Comments</h6>
     <ul>
-        <li>
-            Mihael on
-            <a href="single-post.html#comments">ProteusThemes and its products are great</a>
-            <br/>
-        </li>
-        <li>
-            Jaka on
-            <a href="single-post.html#comments">Readable is most readable WordPress theme out there</a>
-        </li>
-        <li>
-            Mihael on
-            <a href="single-post.html#comments">Everybody loves Readable</a>
-        </li>
+        @foreach ($commentsRecents as $comment)
+            <li>
+                {!! $comment->user->username !!} đã bình luận trên
+                <a href="{!! route('website.posts.show', ['id' => $comment->post->id]) !!}">
+                    {!! $comment->post->title !!}
+                </a>
+                <br/>
+            </li> 
+        @endforeach 
     </ul>
 </div>

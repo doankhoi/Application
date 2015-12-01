@@ -2,7 +2,7 @@
     <div class="container">
         <div class="logo  pull-left">
             <a href="{!! url('/') !!}">
-                <img src="{!! asset('assets/images/website/logo.jpg') !!}" alt="ChickenElectric" width="352" height="140">
+                <img src="{!! asset(config('model.admin.path_folder_photo_website').$INFO_SITE->logo_site) !!}" alt="ChickenElectric" width="352" height="140">
             </a>
         </div>
          
@@ -21,15 +21,25 @@
                     <li {!! classActivePath('/') !!}>
                         <a href="{!! url('/') !!}">Home</a>
                     </li>
-                    <li {!! classActivePath(url('/')) !!}>
-                        <a href="single-post.html">Posts</a>
+                    <li class="">
+                        <a href="{!! route('website.about') !!}">About</a>
                     </li>
                     <li class="">
-                        <a href="#">About</a>
+                        <a href="{!! route('website.contact.index') !!}">Contact</a>
                     </li>
-                    <li class="">
-                        <a href="contact.html">Contact</a>
-                    </li>
+
+                    @if (session('status') === "admin")
+                        <li>
+                             <a href="{!! route('admin.index') !!}">Adminstrator</a>
+                        </li>
+                    @endif
+
+                    @if(session('status') === "redac")
+                        <li>
+                             <a href="{!! route('redac.posts.index') !!}">Redaction</a>
+                        </li>
+                    @endif
+
                     @if (session('status') === "visitor")
                         <li {!! classActivePath('auth/login') !!}>
                              <a href="{!! url('auth/login') !!}">Login</a>
@@ -39,6 +49,7 @@
                              <a href="{!! url('auth/logout') !!}">Logout</a>
                         </li>
                     @endif
+
                 </ul>
             </div> 
         </nav>
@@ -48,7 +59,7 @@
                 <span class="glyphicon  glyphicon-search"></span> 
             </a>
             <div class="social">
-                <a href="#" class="social__container"> 
+                <a href="https://www.facebook.com/BkaIct" target="_blank" class="social__container"> 
                     <span class="zocial-facebook"></span> 
                 </a>
             </div>
@@ -56,7 +67,7 @@
 
         @if(session('status') !== "visitor")
             <div class="info-user pull-right">
-                <img src="{!! asset(config('model.user_info.path_folder_photo_user').Auth::user()->photo) !!}" class="img-circle" id="icon-user">
+                <img src="{!! getImageAvatar(Auth::user()) !!}" class="img-circle" id="icon-user">
                 <a href="#"><span>{!! Auth::user()->username !!}</span></a>
             </div>
         @endif

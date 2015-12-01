@@ -20,7 +20,9 @@ class Post extends Model
         'user_id',
         'category_id',
         'type',
-        'quote'
+        'quote',
+        'images',
+        'nview'
     ];
 
     use DatePresenter;
@@ -42,6 +44,6 @@ class Post extends Model
 
     public function category()
     {
-        return belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\Category');
     }
 }

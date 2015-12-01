@@ -1,24 +1,27 @@
 <div class="boxed  sticky  push-down-45">
     <div class="meta">
-        <img class="wp-post-image" src="{!! asset('assets/images/website/h1.jpg') !!}" alt="Blog image" width="748" height="324">
+        <img class="wp-post-image" src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Blog image" width="748" height="324">
         <div class="meta__container">
             <div class="row">
                 <div class="col-xs-12  col-sm-8">
                     <div class="meta__info">
                         <span class="meta__author">
-                            <img src="{!! asset('assets/images/website/h3.jpg') !!}" alt="Meta avatar" width="30" height="30"> 
-                            <a href="#">Danielle Thatcher</a> in 
-                            <a href="#">News</a> 
+                            <img src="{!! asset(config('model.user_info.path_folder_photo_user').$post->user->photo) !!}" alt="Meta avatar" width="30" height="30"> 
+                            <a href="#">{!! $post->user->username !!}</a> in 
+                            <a href="{!! route('website.posts.category',['id' => $post->category->id]) !!}">{!! $post->category->name !!}</a> 
                         </span>
                         <span class="meta__date">
-                            <span class="glyphicon glyphicon-calendar"></span> &nbsp; 6. May, 2014
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            {!! formatDate($post->created_at) !!}
                         </span>
                     </div>
                 </div>
                 <div class="col-xs-12  col-sm-4">
                     <div class="meta__comments">
                         <span class="glyphicon glyphicon-comment"></span> &nbsp;
-                        <a href="single-post.html#disqus_thread">3</a>
+                        <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}#box-comment">
+                            {!! $post->comments->count() !!}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -36,18 +39,27 @@
         <div class="col-xs-10  col-xs-offset-1">
             <div class="post-content--front-page">
                 <h2 class="front-page-title">
-                    <a href="single-post.html">Sticky Post</a>
+                    <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
+                        {!! $post->title !!}
+                    </a>
                 </h2>
-                <h3>
-                    She had a last view back on the skyline of her hometown Bookmarksgrove. (H3)
-                </h3>
                 <p>
-                    Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+                    {!! $post->summary !!}
                 </p>
             </div>
-            <a href="single-post.html">
+            <div class="row">
+                <div class="box-tag pull-right">
+                    @foreach ($post->tags as $tag)
+                    <a href="{!! route('website.posts.tag', ['tag' => $tag->tag]) !!}">
+                        <span class="fa fa-fw fa-tag"></span>
+                        {!! $tag->tag !!}
+                    </a>
+                    @endforeach
+                </div>
+            </div>
+            <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
                 <div class="read-more">
-                    Continue reading
+                    Đọc thêm
                     <div class="read-more__arrow">
                         <span class="glyphicon  glyphicon-chevron-right"></span>
                     </div>

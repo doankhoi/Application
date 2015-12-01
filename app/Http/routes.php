@@ -18,12 +18,6 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], fu
     require app_path('Http/Routes/admin.php');
 });
 
-/**
-* Define group for member
-*/
-Route::group(['prefix' => 'member', 'namespace' => 'Member', 'as'=> 'member.'], function() {
-    require app_path('Http/Routes/member.php');
-});
 
 /**
 * Define group for website
