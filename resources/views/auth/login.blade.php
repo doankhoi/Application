@@ -1,8 +1,8 @@
-@extends('front.master')
+@extends('front.home')
 
 @section('title', 'Đăng nhập')
 
-@section('content')
+@section('contentLeft')
 
 {!! Form::open(['url' => 'auth/login']) !!}
 <div class="col-xs-12 boxed">

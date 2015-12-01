@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Presenters;
 
 class Comment extends Model
 {
     protected $table = "comments";
 
-    use DatePresenter;
-
+    protected $fillable = [
+    	'content',
+    	'seen',
+    	'user_id',
+    	'post_id'
+    ];
 
     public function post()
     {

@@ -40,7 +40,8 @@ class User extends Model implements AuthenticatableContract,
         'is_active',
         'last_login',
         'register_token',
-        'confirmed'
+        'confirmed',
+        'description'
     ];
 
     /**

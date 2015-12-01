@@ -61,10 +61,29 @@
                 <ul class="nav navbar-nav side-nav">
                     @if(session('status') == 'admin')
                         <li {!! classActivePath('admin') !!}>
-                            <a href="#">
+                            <a href="{!! route('admin.index') !!}">
                                 <span class="fa fa-fw fa-dashboard"></span>
                                 Dashboard
                             </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#siteinfo">
+                                <span class="fa fa-fw fa-cogs"></span>
+                                Site Configuration.
+                                <span class="fa fa-fw fa-caret-down"></span>
+                            </a>
+                            <ul id="siteinfo" class="collapse">
+                                <li>
+                                    <a href="{!! route('admin.site.index') !!}">
+                                        Chi tiết.
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{!! route('admin.site.edit', ['id' => $INFO_SITE->id]) !!}">
+                                        Chỉnh sửa.
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li {!! classActiveSegment(1, 'user') !!}>
                             <a href="#" data-toggle="collapse" data-target="#usermenu">
@@ -74,25 +93,25 @@
                             </a>
                             <ul id="usermenu" class="collapse">
                                 <li>
-                                    <a href="#">
+                                    <a href="{!! route('admin.users.index') !!}">
                                         Xem tất cả
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{!! route('admin.users.create') !!}">
                                         Thêm mới
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li {!! classActivePath('contact') !!}>
-                            <a href="#">
+                            <a href="{!! route('admin.contacts.index') !!}">
                                 <span class="fa fa-fw fa-envelope"></span> 
                                 Messages
                             </a>
                         </li>  
                         <li {!! classActivePath('comment') !!}>
-                            <a href="#">
+                            <a href="{!! route('admin.comments.index') !!}">
                                 <span class="fa fa-fw fa-comments"></span> 
                                 Comments
                             </a>
@@ -100,7 +119,7 @@
                     @endif
 
                     <li {!! classActivePath('medias') !!}>
-                        <a href="#">
+                        <a href="{!! route('redac.media') !!}">
                             <span class="fa fa-fw fa-file-image-o"></span> 
                             Media
                         </a>
@@ -132,7 +151,7 @@
         <div id="page-wrapper">
 
             <div class="container-fluid">
-
+                {!! Breadcrumbs::renderIfExists() !!}
                 @yield('main')
 
             </div>

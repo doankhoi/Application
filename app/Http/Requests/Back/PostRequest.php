@@ -23,7 +23,22 @@ class PostRequest extends Request
      */
     public function rules()
     {
-        $id = $this->id ? ','.$this->id : '';
+        $id = "";
+        if ($this->isMethod('patch') || $this->isMethod('put')) 
+        {
+            $id = ",".$this->id;
+        }
+        
+        $ruleImage = "";
+        if(strlen($id) == 0) 
+        {
+            $ruleImage = 'required|image|max:5000';
+        }
+        else 
+        {
+            $ruleImage = 'image|max:5000';
+        }
+
         return [
             'title' => 'required|max:255',
             'summary' => 'required|max:60000',
@@ -31,7 +46,8 @@ class PostRequest extends Request
             'slug' => 'required|unique:posts,slug'.$id,
             'tags' => 'tags',
             'category_id' => 'required|integer',
-            'type' => 'required|integer'
+            'type' => 'required|integer',
+            'images' => $ruleImage
         ];
     }
 
@@ -50,7 +66,10 @@ class PostRequest extends Request
             'category_id.required' => 'Trường nhóm bài viết rỗng.',
             'category_id.integer' => 'Trường nhóm bài viết giá trị không hợp lệ.',
             'type.required' => 'Trường loại bài viết rỗng.',
-            'type.integer' => 'Trường loại bài viết giá trị không hợp lệ.'
+            'type.integer' => 'Trường loại bài viết giá trị không hợp lệ.',
+            'images.required' => 'Trường ảnh đại diện rỗng.',
+            'images.image' => 'Trường ảnh đại diện chỉ hỗ trợ định đạng jpg, png, gif',
+            'images.max'   => 'Trường ảnh đại diện vượt quá kích thước 5 MB.'
         ];
     }
 }

@@ -148,6 +148,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
         App\Providers\ValidateServiceProvider::class,
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -204,6 +207,9 @@ return [
         'AdminAuth' => App\Facades\AdminAuth::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

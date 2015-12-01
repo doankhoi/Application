@@ -10,7 +10,7 @@ class CommentRepository extends BaseRepository
     
     function __construct(Comment $comment)
     {
-        $this->model = $post;
+        $this->model = $comment;
     }
 
 }

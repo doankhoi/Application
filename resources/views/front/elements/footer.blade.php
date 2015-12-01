@@ -2,11 +2,11 @@
     <div class="container">
         <div class="col-xs-12  col-md-3">
             <div class="widget-about  push-down-30">
-                <img src="{!! asset('assets/images/website/logo.jpg') !!}" alt="Logo" width="176" height="70">
+                <img src="{!! asset(config('model.admin.path_folder_photo_website').$INFO_SITE->logo_site) !!}" alt="Logo" width="176" height="70">
                 <br/>
 
                 <span class="footer__text">
-                    We focus on highly customizable, fast and optimized themes for variety of popular platform like WordPress and Magento.
+                    {!! $INFO_SITE->site_des !!}
                 </span>
             </div>
         </div>
@@ -21,11 +21,9 @@
                 <h6>Navigation</h6>
                 <hr>
                 <ul class="navigation">
-                    <li> <a href="index.html">Home</a> </li>
-                    <li> <a href="single-post.html">Post Formats</a> </li>
-                    <li> <a href="elements.html">Elements</a> </li>
-                    <li> <a href="about-us.html">About</a> </li>
-                    <li> <a href="contact.html">Contact</a> </li>
+                    <li> <a href="{!! route('website.index') !!}">Home</a> </li>
+                    <li> <a href="{!! route('website.about') !!}">About</a> </li>
+                    <li> <a href="{!! route('website.contact.index') !!}">Contact</a> </li>
                 </ul>
             </nav>
         </div>
@@ -35,9 +33,12 @@
                 <h6>Contact Us</h6>
                 <hr>
                 <span class="widget-contact__text">
-                    <span class="widget-contact__title">Chicken Electric</span>
-                    <br>Email: osbkca@gmail.com
-                    <br>Skype: doankhoi
+                    <span class="widget-contact__title">{!! $INFO_SITE->site_name !!}</span>
+                    <br>Email: {!! $INFO_SITE->email !!}
+                    <br>Skype: {!! $INFO_SITE->skype !!}
+                    <br>Fanpage: <a href= "{!! $INFO_SITE->facebook !!}">
+                                    {!! $INFO_SITE->facebook !!}
+                                </a>
                 </span>
             </div>
         </div>

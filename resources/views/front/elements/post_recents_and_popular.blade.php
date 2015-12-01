@@ -15,64 +15,36 @@
                          
     <div class="tab-content">
         <div class="tab-pane  fade  in  active" id="recent-posts">
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">
-                        This is a showcase of the most recent posts
-                    </a>
-                </h5>
-                <span class="widget-posts__time">19 hours ago</span>
-            </div>
-
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-3-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">
-                        This is a showcase of the most recent posts
-                    </a>
-                </h5>
-                <span class="widget-posts__time">19 hours ago</span>
-            </div>
-
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">
-                        This is a showcase of the most recent posts
-                    </a>
-                </h5>
-                <span class="widget-posts__time">19 hours ago</span>
-            </div>
+            @foreach ($postsRecents as $post)
+                <div class="push-down-15">
+                    <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                    <h5>
+                        <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
+                            {!! $post->title !!}
+                        </a>
+                    </h5>
+                    <span class="widget-posts__time">
+                        {!! formatDateDiff($post->created_at) !!}
+                    </span>
+                </div>
+            @endforeach
         </div>
 
         <div class="tab-pane  fade" id="popular-posts">
 
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-3-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">
-                        This is a showcase of the most popular posts
-                    </a>
-                </h5>
-                <span class="widget-posts__time">9 hours ago</span>
-            </div>
-
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">This is a showcase of the most popular posts</a>
-                </h5>
-                <span class="widget-posts__time">12 hours ago</span>
-            </div>
-
-            <div class="push-down-15">
-                <img src="images/dummy-licensed/blog-image-3-small.jpg" alt="Posts">
-                <h5>
-                    <a href="single-post.html">This is a showcase of the most popular posts</a>
-                </h5>
-                <span class="widget-posts__time">19 hours ago</span>
-            </div>
+            @foreach ($postsPopular as $post)
+                <div class="push-down-15">
+                    <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                    <h5>
+                        <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
+                            {!! $post->title !!}
+                        </a>
+                    </h5>
+                    <span class="widget-posts__time">
+                        {!! formatDateDiff($post->created_at) !!}
+                    </span>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>

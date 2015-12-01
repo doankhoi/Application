@@ -5,10 +5,28 @@
 
 .info-user
 {
-	padding: 10px;
+    padding: 10px;
 }
 
 #icon-user {
-	width: 40px;
+    width: 40px;
+    height: 40px;
+}
+
+.post-author img{
+    height: 80px;
+    width: 80px;
+}
+
+.wp-post-image{
+    height: 500px;
+}
+
+.img-post-sidebar{
+	width: 90px;
 	height: 40px;
+}
+
+.time-comment{
+    margin-left: 10px;
 }

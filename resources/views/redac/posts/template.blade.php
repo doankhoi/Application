@@ -21,6 +21,11 @@
         </div>
 
         <div class="form-group">
+            <label for="images">Ảnh đại diện</label>
+            {!! Form::file('images', ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
             <label for="category_id">Nhóm bài viết</label>
             {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
         </div>
@@ -47,7 +52,7 @@
 
         <div class="form-group">
             <label for="tags">Tags</label>
-            {!! Form::text('tags', null, ['class' => 'form-control']) !!}
+            {!! Form::text('tags', isset($tagsArr) ? implode(",", $tagsArr) : null, ['class' => 'form-control']) !!}
         </div>
         
         <div class="form-group">

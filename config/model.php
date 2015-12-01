@@ -11,7 +11,7 @@
                 3 => 'Không xác định',
             ],
             'path_folder_photo_user' => '/assets/images/users/',
-            'photo_default' => 'novatar.png'
+            'photo_default' => 'noavatar.png'
         ],
         'posts' => [
             'type' => [
@@ -19,6 +19,10 @@
                 2 => 'Bài đăng được ghim',
                 3 => 'Bài đăng với video',
                 4 => 'Bài đăng với tiêu đề'
-             ],
+            ],
+            'path_folder_photo_post' => '/assets/images/posts/'
         ],
+        'admin' => [
+            'path_folder_photo_website' => '/assets/images/website/'
+        ]
     ];

@@ -5,7 +5,7 @@
 @section('content')
 
 
-<div class="col-xs-12 boxed">
+<div class="col-xs-12 boxed" style="margin-bottom: 20px;">
     <h3 class="form-group">Đăng ký thành viên.</h3>
     <hr>
     @include('front.elements.flash_notification')
@@ -15,9 +15,9 @@
         <div class="form-group">
             <div class="col-xs-2 col-xs-offset-1">
                 @if(isset($user))
-                    <img src="{!! config('model.user_info.path_folder_photo_user').$user->photo !!}" class="img-responsive" id="photo-user">
+                    <img src="{!! asset(config('model.user_info.path_folder_photo_user').$user->photo) !!}" class="img-responsive" id="photo-user">
                 @else
-                    <img src="{!! config('model.user_info.path_folder_photo_user'). config('model.user_info.photo_default') !!}" class="img-responsive" id="photo-user">
+                    <img src="{!! asset(config('model.user_info.path_folder_photo_user'). config('model.user_info.photo_default')) !!}" class="img-responsive" id="photo-user">
                 @endif
             </div>
             <div class="col-xs-7">
@@ -46,6 +46,13 @@
     </div>
 
     <div class="form-group">
+        <label for="password_confirmation" class="col-xs-3 control-label">Nhập lại mật khẩu</label>
+        <div class="col-xs-9">
+            {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="password" class="col-xs-3 control-label">Mật khẩu</label>
         <div class="col-xs-9">
             {!! Form::password('password', ['class' => 'form-control']) !!}
@@ -65,6 +72,13 @@
         </div>
         <div class="col-xs-3">
             {!! Form::text('lastname', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class="col-xs-3 control-label">Sơ lược về bản thân</label>
+        <div class="col-xs-9">
+            {!! Form::text('description', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -93,6 +107,20 @@
         <label for="address" class="col-xs-3 control-label">Địa chỉ</label>
         <div class="col-xs-9">
             {!! Form::text('address', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label"></label>
+        <div class="col-xs-9">
+            {!! captcha_img('flat') !!}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="capcha" class="col-xs-3 control-label">Captcha</label>
+        <div class="col-xs-9">
+            {!! Form::text('capcha', null, ['class' => 'form-control']) !!}
         </div>
     </div>
 
