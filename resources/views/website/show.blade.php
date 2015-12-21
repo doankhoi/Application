@@ -56,7 +56,7 @@
                         <div class="box-tag pull-right">
                             @foreach ($post->tags as $tag)
                             <a href="{!! route('website.posts.tag', ['tag' => $tag->tag]) !!}">
-                                <span class="fa fa-fw fa-tag"></span>
+                                <span class="glyphicon glyphicon-tag"></span>
                                 {!! $tag->tag !!}
                             </a>
                             @endforeach

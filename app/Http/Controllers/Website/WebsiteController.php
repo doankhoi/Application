@@ -47,7 +47,13 @@ class WebsiteController extends Controller
         {
             DB::beginTransaction();
             $post = Post::findOrFail($id);
-            $post->nview = ($post->nview++);
+            $nview = $post->nview;
+            if(is_string($nview))
+            {
+                $nview = (int)$nview;
+            }
+            $nview++;
+            $post->nview = $nview;
             $post->save();
             DB::commit();
 

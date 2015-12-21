@@ -126,6 +126,25 @@
                     </li>
                     <li {!! classActiveSegment(1, 'blog') !!}>
                         <a href="#" data-toggle="collapse" data-target="#articlemenu">
+                            <span class="fa fa-newspaper-o"></span> 
+                            Categories
+                            <span class="fa fa-fw fa-caret-down">
+                        </a>
+                        <ul id="articlemenu" class="collapse">
+                            <li>
+                                <a href="{!! route('redac.category.index') !!}">
+                                    Xem tất cả.
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{!! route('redac.category.create') !!}">
+                                    Thêm mới
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li {!! classActiveSegment(1, 'blog') !!}>
+                        <a href="#" data-toggle="collapse" data-target="#articlemenu">
                             <span class="fa fa-fw fa-pencil"></span> 
                             Posts
                             <span class="fa fa-fw fa-caret-down">

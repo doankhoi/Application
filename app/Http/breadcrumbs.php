@@ -77,3 +77,21 @@ Breadcrumbs::register('admin.site.edit', function($breadcrumbs)
     $breadcrumbs->parent('admin.index');
     $breadcrumbs->push('Edit Site', route('admin.site.edit'));
 });
+
+Breadcrumbs::register('redac.category.index', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.index');
+    $breadcrumbs->push('Categories', route('redac.category.index'));
+});
+
+Breadcrumbs::register('redac.category.create', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.index');
+    $breadcrumbs->push('Category Create', route('redac.category.create'));
+});
+
+Breadcrumbs::register('redac.category.edit', function($breadcrumbs)
+{
+    $breadcrumbs->parent('admin.index');
+    $breadcrumbs->push('Category Edit', route('redac.category.edit'));
+});

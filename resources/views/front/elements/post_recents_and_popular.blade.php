@@ -16,8 +16,10 @@
     <div class="tab-content">
         <div class="tab-pane  fade  in  active" id="recent-posts">
             @foreach ($postsRecents as $post)
-                <div class="push-down-15">
-                    <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                <div class="row push-down-10">
+                    <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
+                        <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                    </a>
                     <h5>
                         <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
                             {!! $post->title !!}
@@ -33,8 +35,10 @@
         <div class="tab-pane  fade" id="popular-posts">
 
             @foreach ($postsPopular as $post)
-                <div class="push-down-15">
-                    <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                <div class="row push-down-10">
+                    <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
+                        <img src="{!! asset(config('model.posts.path_folder_photo_post').$post->images) !!}" alt="Posts" class="img-post-sidebar">
+                    </a>
                     <h5>
                         <a href="{!! route('website.posts.show', ['id' => $post->id]) !!}">
                             {!! $post->title !!}

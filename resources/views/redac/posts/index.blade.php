@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <a href="{!! route('redac.posts.create') !!}" class="btn btn-primary btn-action pull-right">
-                Tạo bài viết
+                Tạo bài viết mới
             </a>
         </div>
     </div>

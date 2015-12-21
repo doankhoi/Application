@@ -26,4 +26,20 @@ Route::group(['middleware' => 'redac'], function() {
             Route::match(['put', 'patch'], '/', ['uses' => 'PostController@update', 'as' => 'redac.posts.update']);
         });
     });
+
+    Route::group(['prefix' => 'category'], function() {
+        Route::get('/', ['uses' => 'CategoryController@index', 'as' => 'category.index']);
+        Route::get('/delete/{id}', ['uses' => 'CategoryController@destroy', 'as' => 'category.delete']);
+        Route::get('/publishedCate/{id}', ['uses' => 'CategoryController@publishedCate', 'as' => 'category.published']);
+
+        Route::group(['prefix' => 'create', 'as' => 'category.create'], function() {
+            Route::get('/', 'CategoryController@create');
+            Route::post('/', 'CategoryController@store');
+        });
+
+        Route::group(['prefix' => 'edit/{id}', 'where' => ['id' => '[0-9]+'], 'as' => 'category.edit'], function() {
+            Route::get('/', 'CategoryController@edit');
+            Route::match(['put', 'patch'], '/', ['uses' => 'CategoryController@update', 'as' => 'redac.category.update']);
+        });
+    });
 });
